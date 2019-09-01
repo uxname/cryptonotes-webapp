@@ -18,7 +18,7 @@ export default function (props) {
             <input type="text" id='input-note-key' placeholder="Note key..."
                    onChange={e => setNoteKey(e.target.value)}/>
             <br/>
-            <input type="text" id='input-password' placeholder="Password..."
+            <input type="password" id='input-password' placeholder="Password..."
                    onChange={e => setNotePassword(e.target.value)}/>
             <br/>
             <button id="btn-create" onClick={createNote}>Create new</button>
