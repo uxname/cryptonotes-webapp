@@ -18,44 +18,52 @@ function App(props) {
     const [isOpened, setIsOpened] = useState(false);
 
     async function updateNote(key, password, text) {
-        return await client.mutate({
-            mutation: gql`
-                mutation UpdateNote($key: String, $password_hash: String!, $text: String!) {
-                    update_note(key: $key, password_hash: $password_hash, text: $text) {
-                        key
-                        text
+        try {
+            return await client.mutate({
+                mutation: gql`
+                    mutation UpdateNote($key: String, $password_hash: String!, $text: String!) {
+                        update_note(key: $key, password_hash: $password_hash, text: $text) {
+                            key
+                            text
+                        }
                     }
-                }
-            `,
-            variables: {
-                key: key,
-                password_hash: Utils.hash(password),
-                text: Utils.encryptString(text, password, config.SALT)
-            },
-            fetchPolicy: "no-cache"
-        });
+                `,
+                variables: {
+                    key: key,
+                    password_hash: Utils.hash(password),
+                    text: Utils.encryptString(text, password, config.SALT)
+                },
+                fetchPolicy: "no-cache"
+            });
+        } catch (e) {
+            alert(`Error: ${e.message}`);
+        }
     }
 
     async function openNote(key, password) {
-        const note = await client.query({
-            query: gql`
-                query Note($key: String!, $password_hash: String!) {
-                    note(key: $key, password_hash: $password_hash) {
-                        key
-                        text
+        try {
+            const note = await client.query({
+                query: gql`
+                    query Note($key: String!, $password_hash: String!) {
+                        note(key: $key, password_hash: $password_hash) {
+                            key
+                            text
+                        }
                     }
-                }
-            `,
-            variables: {
-                key: key,
-                password_hash: Utils.hash(password)
-            },
-            fetchPolicy: "network-only"
-        });
-        setCurrentNoteKey(key);
-        setCurrentNotePassword(password);
-        setCurrentNoteText(Utils.decryptString(note.data.note.text, password, config.SALT));
-        setIsOpened(true);
+                `,
+                variables: {
+                    key: key,
+                    password_hash: Utils.hash(password)
+                },
+                fetchPolicy: "network-only"
+            });
+            setCurrentNoteKey(key);
+            setCurrentNotePassword(password);
+            setCurrentNoteText(Utils.decryptString(note.data.note.text, password, config.SALT));
+            setIsOpened(true);
+        } catch (e) {
+            alert(`Error: ${e.message}`);
+        }
     }
 
     async function close() {
@@ -75,6 +83,7 @@ function App(props) {
                         currentNotePassword={currentNotePassword}
                         currentNoteText={currentNoteText}
                         setCurrentNoteText={setCurrentNoteText}
+                        openNote={openNote}
                         close={close}
                     /> : <Main updateNote={updateNote} openNote={openNote}/>
             }

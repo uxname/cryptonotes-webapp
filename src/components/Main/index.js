@@ -5,7 +5,8 @@ export default function (props) {
     const [notePassword, setNotePassword] = useState(null);
 
     async function createNote() {
-        return await props.updateNote(noteKey, notePassword, '');
+        await props.updateNote(noteKey, notePassword, '');
+        await props.openNote(noteKey, notePassword);
     }
 
     async function openNote() {

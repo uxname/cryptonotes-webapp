@@ -2,8 +2,9 @@ import React from 'react';
 
 export default function (props) {
 
-    async function updateNote() {
-        return await props.updateNote(props.currentNoteKey, props.currentNotePassword, props.currentNoteText);
+    async function saveNote() {
+        await props.updateNote(props.currentNoteKey, props.currentNotePassword, props.currentNoteText);
+        alert('Saved');
     }
 
     async function close() {
@@ -18,7 +19,7 @@ export default function (props) {
                       placeholder="Note text..." onChange={e => props.setCurrentNoteText(e.target.value)}
                       value={props.currentNoteText || ''}/>
             <br/>
-            <button id="btn-create" onClick={updateNote}>Save</button>
+            <button id="btn-create" onClick={saveNote}>Save</button>
             <button id="btn-close" onClick={close}>Close</button>
         </>
     )
