@@ -7,8 +7,10 @@ export default function (props) {
     const [notePassword, setNotePassword] = useState(null);
 
     async function createNote() {
-        await props.updateNote(noteKey, notePassword, '');
-        await props.openNote(noteKey, notePassword);
+        if (window.confirm('If note already exists - it will cleared, are you sure?')) {
+            await props.updateNote(noteKey, notePassword, '');
+            await props.openNote(noteKey, notePassword);
+        }
     }
 
     async function openNote() {
@@ -17,16 +19,28 @@ export default function (props) {
 
     return (
         <>
-            <TextField margin="normal" type="text" id='input-note-key' label="Note key..."
-                       onChange={e => setNoteKey(e.target.value)}/>
+            <img
+                style={{
+                    margin: 30,
+                    width: 300
+                }}
+                src={process.env.PUBLIC_URL + '/assets/logo.svg'}/>
             <br/>
-            <TextField margin="normal" label='Password' type="password" id='input-password'
-                       onChange={e => setNotePassword(e.target.value)}/>
+            <TextField
+                variant="standard"
+                margin="normal" type="text" id='input-note-key' label="Note key..."
+                onChange={e => setNoteKey(e.target.value)}/>
+            <br/>
+            <TextField
+                variant="standard"
+                margin="normal" label='Password' type="password" id='input-password'
+                onChange={e => setNotePassword(e.target.value)}/>
             <br/>
             <Button style={{
                 margin: 10
-            }} variant="contained" color="secondary" id="btn-create" onClick={createNote}>Create new</Button>
-            <Button variant="contained" color="primary" id="btn-open" onClick={openNote}>Open</Button>
+            }} variant="contained" color="primary" id="btn-open" onClick={openNote}>Open</Button>
+            <br/>
+            <Button variant="contained" color="secondary" id="btn-create" onClick={createNote}>Create new</Button>
         </>
     )
 };
