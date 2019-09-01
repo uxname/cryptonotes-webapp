@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import {TextField} from "@material-ui/core";
 
 export default function (props) {
 
@@ -12,15 +14,26 @@ export default function (props) {
     }
 
     return (
-        <>
-            Current note: {props.currentNoteKey}
+        <div style={{
+            margin: 100
+        }}>
+            <TextField
+                label={`Note key: ${props.currentNoteKey}`}
+                margin="normal"
+                variant="outlined"
+                multiline
+                rows="12"
+                rowsMax="20"
+                fullWidth
+                id='input-note-text'
+                placeholder="Note text..."
+                onChange={e => props.setCurrentNoteText(e.target.value)}
+                value={props.currentNoteText || ''}/>
             <br/>
-            <textarea rows={12} cols={70} id='input-note-text'
-                      placeholder="Note text..." onChange={e => props.setCurrentNoteText(e.target.value)}
-                      value={props.currentNoteText || ''}/>
-            <br/>
-            <button id="btn-create" onClick={saveNote}>Save</button>
-            <button id="btn-close" onClick={close}>Close</button>
-        </>
+            <Button style={{
+                margin: 10
+            }} variant="contained" color="secondary" id="btn-create" onClick={saveNote}>Save</Button>
+            <Button variant="contained" color="primary" id="btn-close" onClick={close}>Close</Button>
+        </div>
     )
 };

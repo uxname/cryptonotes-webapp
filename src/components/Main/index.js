@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 export default function (props) {
     const [noteKey, setNoteKey] = useState(null);
@@ -15,14 +17,16 @@ export default function (props) {
 
     return (
         <>
-            <input type="text" id='input-note-key' placeholder="Note key..."
-                   onChange={e => setNoteKey(e.target.value)}/>
+            <TextField margin="normal" type="text" id='input-note-key' label="Note key..."
+                       onChange={e => setNoteKey(e.target.value)}/>
             <br/>
-            <input type="password" id='input-password' placeholder="Password..."
-                   onChange={e => setNotePassword(e.target.value)}/>
+            <TextField margin="normal" label='Password' type="password" id='input-password'
+                       onChange={e => setNotePassword(e.target.value)}/>
             <br/>
-            <button id="btn-create" onClick={createNote}>Create new</button>
-            <button id="btn-open" onClick={openNote}>Open</button>
+            <Button style={{
+                margin: 10
+            }} variant="contained" color="secondary" id="btn-create" onClick={createNote}>Create new</Button>
+            <Button variant="contained" color="primary" id="btn-open" onClick={openNote}>Open</Button>
         </>
     )
 };
