@@ -36,13 +36,11 @@ export default function (props) {
                 onChange={e => props.setCurrentNoteText(e.target.value)}
                 value={props.currentNoteText || ''}/>
             <br/>
-            <Button style={{
-                margin: 10
-            }} variant="contained" color="secondary" id="btn-create" onClick={saveNote}>Save</Button>
+            <Button variant="contained" color="secondary" id="btn-create" onClick={saveNote}>Save</Button>
             <Button style={{
                 margin: 10
             }} variant="contained" color="primary" id="btn-close" onClick={close}>Close</Button>
-            <Button variant="contained" color="primary" id="btn-delete" onClick={doDelete}>Delete</Button>
+            <Button variant="contained" color="default" id="btn-delete" onClick={doDelete}>Delete</Button>
         </div>
     )
 };
