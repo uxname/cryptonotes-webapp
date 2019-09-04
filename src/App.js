@@ -66,6 +66,26 @@ function App(props) {
         }
     }
 
+    async function doDelete(key, password) {
+        try {
+            await client.mutate({
+                mutation: gql`
+                    mutation DeleteNote($key: String, $password_hash: String!) {
+                        delete_note(key: $key, password_hash: $password_hash)
+                    }
+                `,
+                variables: {
+                    key: key,
+                    password_hash: Utils.hash(password)
+                },
+                fetchPolicy: "no-cache"
+            });
+            await close();
+        } catch (e) {
+            alert(`Error: ${e.message}`);
+        }
+    }
+
     async function close() {
         setCurrentNoteKey(null);
         setCurrentNotePassword(null);
@@ -85,6 +105,7 @@ function App(props) {
                         setCurrentNoteText={setCurrentNoteText}
                         openNote={openNote}
                         close={close}
+                        doDelete={doDelete}
                     /> : <Main updateNote={updateNote} openNote={openNote}/>
             }
         </div>

@@ -13,6 +13,12 @@ export default function (props) {
         props.close();
     }
 
+    async function doDelete() {
+        if (window.confirm('Are you sure?')) {
+            props.doDelete(props.currentNoteKey, props.currentNotePassword);
+        }
+    }
+
     return (
         <div style={{
             margin: 100
@@ -33,7 +39,10 @@ export default function (props) {
             <Button style={{
                 margin: 10
             }} variant="contained" color="secondary" id="btn-create" onClick={saveNote}>Save</Button>
-            <Button variant="contained" color="primary" id="btn-close" onClick={close}>Close</Button>
+            <Button style={{
+                margin: 10
+            }} variant="contained" color="primary" id="btn-close" onClick={close}>Close</Button>
+            <Button variant="contained" color="primary" id="btn-delete" onClick={doDelete}>Delete</Button>
         </div>
     )
 };
