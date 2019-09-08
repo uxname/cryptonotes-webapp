@@ -16,12 +16,21 @@ export default function (props) {
             if (parseInt(maxOpeningCount.toString()) === 0) {
                 return alert('Wrong value: zero');
             }
+
+            if (!noteKey || !notePassword) {
+                return alert('Enter key or password');
+            }
+
             await props.updateNote(noteKey, notePassword, '', ttl, parseInt(maxOpeningCount.toString()) > -1 ? parseInt(maxOpeningCount.toString()) + 1 : -1); // +1 for first open by code below
             await props.openNote(noteKey, notePassword);
         }
     }
 
     async function openNote() {
+        if (!noteKey || !notePassword) {
+            return alert('Enter key or password');
+        }
+
         return await props.openNote(noteKey, notePassword);
     }
 
