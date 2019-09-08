@@ -17,12 +17,18 @@ function App(props) {
     const [currentNoteText, setCurrentNoteText] = useState(null);
     const [isOpened, setIsOpened] = useState(false);
 
-    async function updateNote(key, password, text) {
+    async function updateNote(key, password, text, ttl = -1, maxOpeningCount = -1) {
         try {
             return await client.mutate({
                 mutation: gql`
-                    mutation UpdateNote($key: String, $password_hash: String!, $text: String!) {
-                        update_note(key: $key, password_hash: $password_hash, text: $text) {
+                    mutation UpdateNote($key: String, $password_hash: String!, $text: String!, $ttlInSeconds: Int, $maxOpeningsCount: Int) {
+                        update_note(
+                            key: $key,
+                            password_hash: $password_hash,
+                            text: $text,
+                            ttlInSeconds:$ttlInSeconds,
+                            maxOpeningsCount: $maxOpeningsCount
+                        ) {
                             key
                             text
                         }
@@ -31,7 +37,9 @@ function App(props) {
                 variables: {
                     key: key,
                     password_hash: Utils.hash(password),
-                    text: Utils.encryptString(text, password, config.SALT)
+                    text: Utils.encryptString(text, password, config.SALT),
+                    ttlInSeconds: parseInt(ttl.toString()),
+                    maxOpeningsCount: parseInt(maxOpeningCount.toString())
                 },
                 fetchPolicy: "no-cache"
             });

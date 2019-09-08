@@ -1,14 +1,22 @@
 import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 export default function (props) {
     const [noteKey, setNoteKey] = useState(null);
     const [notePassword, setNotePassword] = useState(null);
+    const [ttl, setTtl] = useState(-1);
+    const [maxOpeningCount, setMaxOpeningCount] = useState(-1);
 
     async function createNote() {
         if (window.confirm('If note already exists - it will cleared, are you sure?')) {
-            await props.updateNote(noteKey, notePassword, '');
+            if (parseInt(maxOpeningCount.toString()) === 0) {
+                return alert('Wrong value: zero');
+            }
+            await props.updateNote(noteKey, notePassword, '', ttl, parseInt(maxOpeningCount.toString()) > -1 ? parseInt(maxOpeningCount.toString()) + 1 : -1); // +1 for first open by code below
             await props.openNote(noteKey, notePassword);
         }
     }
@@ -24,7 +32,7 @@ export default function (props) {
                     margin: 30,
                     width: 300
                 }}
-                src={process.env.PUBLIC_URL + '/assets/logo.svg'}/>
+                src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt="logo"/>
             <br/>
             <TextField
                 variant="standard"
@@ -36,10 +44,48 @@ export default function (props) {
                 margin="normal" label='Password' type="password" id='input-password'
                 onChange={e => setNotePassword(e.target.value)}/>
             <br/>
+            <br/>
+            <InputLabel htmlFor="note-ttl">Delete after</InputLabel>
+            <Select
+                value={ttl}
+                onChange={(val) => setTtl(val.target.value)}
+                inputProps={{
+                    name: 'ttl',
+                    id: 'note-ttl',
+                }}>
+                <MenuItem value={-1}>Don't delete</MenuItem>
+                <MenuItem value={60}>1 minute</MenuItem>
+                <MenuItem value={60 * 5}>5 minutes</MenuItem>
+                <MenuItem value={60 * 10}>10 minutes</MenuItem>
+                <MenuItem value={60 * 30}>30 minutes</MenuItem>
+                <MenuItem value={60 * 60}>1 hour</MenuItem>
+                <MenuItem value={60 * 60 * 3}>3 hours</MenuItem>
+                <MenuItem value={60 * 60 * 6}>6 hours</MenuItem>
+                <MenuItem value={60 * 60 * 12}>12 hours</MenuItem>
+                <MenuItem value={60 * 60 * 24}>1 day</MenuItem>
+                <MenuItem value={60 * 60 * 24 * 3}>3 days</MenuItem>
+                <MenuItem value={60 * 60 * 24 * 7}>7 days</MenuItem>
+                <MenuItem value={60 * 60 * 24 * 14}>14 days</MenuItem>
+                <MenuItem value={60 * 60 * 24 * 30}>30 days</MenuItem>
+                <MenuItem value={60 * 60 * 24 * 30 * 3}>3 months</MenuItem>
+                <MenuItem value={60 * 60 * 24 * 30 * 6}>6 months</MenuItem>
+                <MenuItem value={60 * 60 * 24 * 30 * 12}>1 year</MenuItem>
+                <MenuItem value={60 * 60 * 24 * 30 * 12 * 3}>3 years</MenuItem>
+                <MenuItem value={60 * 60 * 24 * 30 * 12 * 5}>5 years</MenuItem>
+            </Select>
+            <br/>
+            <TextField
+                variant="standard"
+                inputProps={{
+                    min: -1
+                }}
+                value={maxOpeningCount}
+                margin="normal" label='Max openings count' type="number" id='input-max-openings-count'
+                onChange={e => setMaxOpeningCount(e.target.value)}/>
+            <br/>
             <Button style={{
                 margin: 10
             }} variant="contained" color="primary" id="btn-open" onClick={openNote}>Open</Button>
-            <br/>
             <Button variant="contained" color="secondary" id="btn-create" onClick={createNote}>Create new</Button>
         </>
     )
