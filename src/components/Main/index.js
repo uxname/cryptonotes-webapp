@@ -14,7 +14,7 @@ export default function (props) {
     let notePasswordFromUrl = params.get('p');
 
     const [noteKey, setNoteKey] = useState(noteKeyFromUrl || cuid());
-    const [notePassword, setNotePassword] = useState(notePasswordFromUrl);
+    const [notePassword, setNotePassword] = useState(notePasswordFromUrl || '');
     const [ttl, setTtl] = useState(-1);
     const [maxOpeningCount, setMaxOpeningCount] = useState(-1);
 
