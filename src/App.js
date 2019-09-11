@@ -116,6 +116,16 @@ function App(props) {
                         doDelete={doDelete}
                     /> : <Main updateNote={updateNote} openNote={openNote}/>
             }
+            <hr/>
+            <a href="https://github.com/uxname/cryptonotes-webapp/">
+                <img src="https://img.shields.io/github/forks/uxname/cryptonotes-webapp.svg?style=social" alt=""/>
+            </a>&nbsp;
+            <a href="https://github.com/uxname/cryptonotes-webapp/">
+                <img src="https://img.shields.io/github/stars/uxname/cryptonotes-webapp.svg?style=social" alt=""/>
+            </a>&nbsp;
+            <a href="https://github.com/uxname/cryptonotes-webapp/">
+                <img src="https://img.shields.io/github/license/uxname/cryptonotes-webapp.svg?style=social" alt=""/>
+            </a>&nbsp;
         </div>
     );
 }
