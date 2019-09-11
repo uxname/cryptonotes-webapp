@@ -7,8 +7,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import cuid from 'cuid';
 
 export default function (props) {
-    const [noteKey, setNoteKey] = useState(cuid());
-    const [notePassword, setNotePassword] = useState(null);
+    let search = window.location.search;
+    let params = new URLSearchParams(search);
+
+    let noteKeyFromUrl = params.get('k');
+    let notePasswordFromUrl = params.get('p');
+
+    const [noteKey, setNoteKey] = useState(noteKeyFromUrl || cuid());
+    const [notePassword, setNotePassword] = useState(notePasswordFromUrl);
     const [ttl, setTtl] = useState(-1);
     const [maxOpeningCount, setMaxOpeningCount] = useState(-1);
 
@@ -52,6 +58,7 @@ export default function (props) {
             <br/>
             <TextField
                 variant="standard"
+                value={notePassword}
                 margin="normal" label='Password' type="password" id='input-password'
                 onChange={e => setNotePassword(e.target.value)}/>
             <br/>
