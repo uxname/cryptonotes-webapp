@@ -30,8 +30,16 @@ export default function (props) {
 
     return (
         <div style={{
-            margin: 100
+            marginLeft: 100,
+            marginRight: 100,
         }}>
+            <img
+                style={{
+                    margin: 30,
+                    width: 300
+                }}
+                src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt="logo"/>
+            <br/>
             <a href={urlString}>
                 {urlString}
             </a>
@@ -52,7 +60,7 @@ export default function (props) {
 
 
             <TextField
-                label={`Note key: ${props.currentNoteKey}`}
+                label={`Note text`}
                 margin="normal"
                 variant="outlined"
                 multiline
