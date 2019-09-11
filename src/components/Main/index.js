@@ -4,9 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import cuid from 'cuid';
 
 export default function (props) {
-    const [noteKey, setNoteKey] = useState(null);
+    const [noteKey, setNoteKey] = useState(cuid());
     const [notePassword, setNotePassword] = useState(null);
     const [ttl, setTtl] = useState(-1);
     const [maxOpeningCount, setMaxOpeningCount] = useState(-1);
@@ -44,6 +45,7 @@ export default function (props) {
                 src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt="logo"/>
             <br/>
             <TextField
+                value={noteKey}
                 variant="standard"
                 margin="normal" type="text" id='input-note-key' label="Note key..."
                 onChange={e => setNoteKey(e.target.value)}/>
