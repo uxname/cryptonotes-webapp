@@ -117,6 +117,7 @@ function App(props) {
                     /> : <Main updateNote={updateNote} openNote={openNote}/>
             }
             <hr/>
+            Web app:&nbsp;&nbsp;&nbsp;
             <a href="https://github.com/uxname/cryptonotes-webapp/">
                 <img src="https://img.shields.io/github/forks/uxname/cryptonotes-webapp.svg?style=social" alt=""/>
             </a>&nbsp;
@@ -125,6 +126,17 @@ function App(props) {
             </a>&nbsp;
             <a href="https://github.com/uxname/cryptonotes-webapp/">
                 <img src="https://img.shields.io/github/license/uxname/cryptonotes-webapp.svg?style=social" alt=""/>
+            </a>&nbsp;
+            <br/>
+            Server:&nbsp;&nbsp;&nbsp;
+            <a href="https://github.com/uxname/cryptonotes-server/">
+                <img src="https://img.shields.io/github/forks/uxname/cryptonotes-server.svg?style=social" alt=""/>
+            </a>&nbsp;
+            <a href="https://github.com/uxname/cryptonotes-server/">
+                <img src="https://img.shields.io/github/stars/uxname/cryptonotes-server.svg?style=social" alt=""/>
+            </a>&nbsp;
+            <a href="https://github.com/uxname/cryptonotes-server/">
+                <img src="https://img.shields.io/github/license/uxname/cryptonotes-server.svg?style=social" alt=""/>
             </a>&nbsp;
         </div>
     );
