@@ -5,6 +5,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import cuid from 'cuid';
+import IconButton from '@material-ui/core/IconButton';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 export default function (props) {
     let search = window.location.search;
@@ -50,11 +52,20 @@ export default function (props) {
                 }}
                 src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt="logo"/>
             <br/>
-            <TextField
-                value={noteKey}
-                variant="standard"
-                margin="normal" type="text" id='input-note-key' label="Note key..."
-                onChange={e => setNoteKey(e.target.value)}/>
+            <div>
+                <TextField
+                    value={noteKey}
+                    variant="standard"
+                    margin="normal" type="text" id='input-note-key' label="Note key..."
+                    onChange={e => setNoteKey(e.target.value)}/>
+                <IconButton aria-label="generateKey" onClick={() => {
+                    setNoteKey(cuid());
+                    setNotePassword('');
+                    window.history.replaceState({}, null, process.env.REACT_APP_WEBAPP_URL);
+                }}>
+                    <RefreshIcon/>
+                </IconButton>
+            </div>
             <br/>
             <TextField
                 variant="standard"
