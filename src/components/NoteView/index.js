@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import {TextField} from "@material-ui/core";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Utils from "../../helper/utils";
 
 export default function (props) {
 
@@ -26,7 +27,7 @@ export default function (props) {
     const urlString = process.env.REACT_APP_WEBAPP_URL
         + '?k='
         + props.currentNoteKey
-        + (showPasswordInUrl ? '&p=' + props.currentNotePassword : "");
+        + (showPasswordInUrl ? '&p=' + Utils.base64encode(props.currentNotePassword) : "");
 
     return (
         <div style={{

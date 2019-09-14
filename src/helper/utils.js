@@ -15,4 +15,12 @@ export default class Utils {
     static decryptString(str, password, salt) {
         return CryptoJS.AES.decrypt(str, salt + password + salt).toString(CryptoJS.enc.Utf8);
     }
+
+    static base64encode(str) {
+        return btoa(unescape(encodeURIComponent(str)));
+    }
+
+    static base64decode(str) {
+        return decodeURIComponent(escape(window.atob(str)));
+    }
 }

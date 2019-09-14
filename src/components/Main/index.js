@@ -7,13 +7,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import cuid from 'cuid';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import Utils from "../../helper/utils";
 
 export default function (props) {
     let search = window.location.search;
     let params = new URLSearchParams(search);
 
     let noteKeyFromUrl = params.get('k');
-    let notePasswordFromUrl = params.get('p');
+    let notePasswordFromUrl = params.get('p') ? Utils.base64decode(params.get('p')) : "";
 
     const [noteKey, setNoteKey] = useState(noteKeyFromUrl || cuid());
     const [notePassword, setNotePassword] = useState(notePasswordFromUrl || '');
