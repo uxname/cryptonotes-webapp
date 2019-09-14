@@ -8,6 +8,7 @@ import Utils from "../../helper/utils";
 export default function (props) {
 
     const [showPasswordInUrl, setShowPasswordInUrl] = useState(false);
+    const [autoOpenInUrl, setAutoOpenInUrl] = useState(false);
 
     async function saveNote() {
         await props.updateNote(props.currentNoteKey, props.currentNotePassword, props.currentNoteText);
@@ -27,7 +28,8 @@ export default function (props) {
     const urlString = process.env.REACT_APP_WEBAPP_URL
         + '?k='
         + props.currentNoteKey
-        + (showPasswordInUrl ? '&p=' + Utils.base64encode(props.currentNotePassword) : "");
+        + (showPasswordInUrl ? '&p=' + Utils.base64encode(props.currentNotePassword) : "")
+        + (autoOpenInUrl ? '&ao=true' : "");
 
     return (
         <div style={{
@@ -54,9 +56,22 @@ export default function (props) {
                                       if (!window.confirm('Are you sure to show password?')) return;
                                   }
                                   setShowPasswordInUrl(e.target.checked)
+                                  if (!e.target.checked) {
+                                      setAutoOpenInUrl(false);
+                                  }
                               }}/>
                 }
                 label="Show password in URL"
+            />
+            <FormControlLabel
+                control={
+                    <Checkbox disabled={!showPasswordInUrl} checked={autoOpenInUrl}
+                              value={autoOpenInUrl}
+                              onChange={e => {
+                                  setAutoOpenInUrl(e.target.checked)
+                              }}/>
+                }
+                label="Auto open"
             />
 
 

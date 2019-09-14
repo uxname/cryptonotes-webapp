@@ -15,6 +15,7 @@ export default function (props) {
 
     let noteKeyFromUrl = params.get('k');
     let notePasswordFromUrl = params.get('p') ? Utils.base64decode(params.get('p')) : "";
+    let autoOpen = params.get('ao');
 
     const [noteKey, setNoteKey] = useState(noteKeyFromUrl || cuid());
     const [notePassword, setNotePassword] = useState(notePasswordFromUrl || '');
@@ -42,6 +43,11 @@ export default function (props) {
         }
 
         return await props.openNote(noteKey, notePassword);
+    }
+
+    if (autoOpen === 'true') {
+        openNote();
+        return <>Opening note: {noteKey}, please wait... </>
     }
 
     return (
