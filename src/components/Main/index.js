@@ -8,6 +8,7 @@ import cuid from 'cuid';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import Utils from "../../helper/utils";
+import Grid from '@material-ui/core/Grid';
 
 export default function (props) {
     let search = window.location.search;
@@ -52,79 +53,83 @@ export default function (props) {
 
     return (
         <>
-            <a href={process.env.REACT_APP_WEBAPP_URL}>
-                <img
-                    style={{
-                        margin: 30,
-                        width: 300
-                    }}
-                    src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt="logo"/>
-            </a>
-            <br/>
-            <div>
-                <TextField
-                    value={noteKey}
-                    variant="standard"
-                    margin="normal" type="text" id='input-note-key' label="Note key..."
-                    onChange={e => setNoteKey(e.target.value)}/>
-                <IconButton aria-label="generateKey" onClick={() => {
-                    setNoteKey(cuid());
-                    setNotePassword('');
-                    window.history.replaceState({}, null, process.env.REACT_APP_WEBAPP_URL);
-                }}>
-                    <RefreshIcon/>
-                </IconButton>
-            </div>
-            <br/>
-            <TextField
-                variant="standard"
-                value={notePassword}
-                margin="normal" label='Password' type="password" id='input-password'
-                onChange={e => setNotePassword(e.target.value)}/>
-            <br/>
-            <br/>
-            <InputLabel htmlFor="note-ttl">Delete after</InputLabel>
-            <Select
-                value={ttl}
-                onChange={(val) => setTtl(val.target.value)}
-                inputProps={{
-                    name: 'ttl',
-                    id: 'note-ttl',
-                }}>
-                <MenuItem value={-1}>Don't delete</MenuItem>
-                <MenuItem value={60}>1 minute</MenuItem>
-                <MenuItem value={60 * 5}>5 minutes</MenuItem>
-                <MenuItem value={60 * 10}>10 minutes</MenuItem>
-                <MenuItem value={60 * 30}>30 minutes</MenuItem>
-                <MenuItem value={60 * 60}>1 hour</MenuItem>
-                <MenuItem value={60 * 60 * 3}>3 hours</MenuItem>
-                <MenuItem value={60 * 60 * 6}>6 hours</MenuItem>
-                <MenuItem value={60 * 60 * 12}>12 hours</MenuItem>
-                <MenuItem value={60 * 60 * 24}>1 day</MenuItem>
-                <MenuItem value={60 * 60 * 24 * 3}>3 days</MenuItem>
-                <MenuItem value={60 * 60 * 24 * 7}>7 days</MenuItem>
-                <MenuItem value={60 * 60 * 24 * 14}>14 days</MenuItem>
-                <MenuItem value={60 * 60 * 24 * 30}>30 days</MenuItem>
-                <MenuItem value={60 * 60 * 24 * 30 * 3}>3 months</MenuItem>
-                <MenuItem value={60 * 60 * 24 * 30 * 6}>6 months</MenuItem>
-                <MenuItem value={60 * 60 * 24 * 30 * 12}>1 year</MenuItem>
-                <MenuItem value={60 * 60 * 24 * 30 * 12 * 3}>3 years</MenuItem>
-                <MenuItem value={60 * 60 * 24 * 30 * 12 * 5}>5 years</MenuItem>
-            </Select>
-            <br/>
-            <TextField
-                variant="standard"
-                inputProps={{
-                    min: -1
-                }}
-                value={maxOpeningCount}
-                margin="normal" label='Max openings count' type="number" id='input-max-openings-count'
-                onChange={e => setMaxOpeningCount(e.target.value)}/>
-            <br/>
-            <Button style={{
-                margin: 10
-            }} variant="contained" color="primary" id="btn-open" onClick={openNote}>Open</Button>
-            <Button variant="contained" color="secondary" id="btn-create" onClick={createNote}>Create new</Button>
+            <Grid container
+                  spacing={1}
+            >
+                <Grid item md={12} sm={12} xs={12}>
+
+                </Grid>
+                <Grid item md={12} sm={12} xs={12}>
+                    <TextField
+                        value={noteKey}
+                        variant="standard"
+                        margin="normal" type="text" id='input-note-key' label="Note key..."
+                        onChange={e => setNoteKey(e.target.value)}/>
+                    <IconButton aria-label="generateKey" onClick={() => {
+                        setNoteKey(cuid());
+                        setNotePassword('');
+                        window.history.replaceState({}, null, process.env.REACT_APP_WEBAPP_URL);
+                    }}>
+                        <RefreshIcon/>
+                    </IconButton>
+                </Grid>
+                <Grid item md={12} sm={12} xs={12}>
+                    <TextField
+                        variant="standard"
+                        value={notePassword}
+                        margin="normal" label='Password' type="password" id='input-password'
+                        onChange={e => setNotePassword(e.target.value)}/>
+                </Grid>
+                <Grid item md={12} sm={12} xs={12}>
+                    <InputLabel htmlFor="note-ttl">Delete after</InputLabel>
+                    <Select
+                        value={ttl}
+                        onChange={(val) => setTtl(val.target.value)}
+                        inputProps={{
+                            name: 'ttl',
+                            id: 'note-ttl',
+                        }}>
+                        <MenuItem value={-1}>Don't delete</MenuItem>
+                        <MenuItem value={60}>1 minute</MenuItem>
+                        <MenuItem value={60 * 5}>5 minutes</MenuItem>
+                        <MenuItem value={60 * 10}>10 minutes</MenuItem>
+                        <MenuItem value={60 * 30}>30 minutes</MenuItem>
+                        <MenuItem value={60 * 60}>1 hour</MenuItem>
+                        <MenuItem value={60 * 60 * 3}>3 hours</MenuItem>
+                        <MenuItem value={60 * 60 * 6}>6 hours</MenuItem>
+                        <MenuItem value={60 * 60 * 12}>12 hours</MenuItem>
+                        <MenuItem value={60 * 60 * 24}>1 day</MenuItem>
+                        <MenuItem value={60 * 60 * 24 * 3}>3 days</MenuItem>
+                        <MenuItem value={60 * 60 * 24 * 7}>7 days</MenuItem>
+                        <MenuItem value={60 * 60 * 24 * 14}>14 days</MenuItem>
+                        <MenuItem value={60 * 60 * 24 * 30}>30 days</MenuItem>
+                        <MenuItem value={60 * 60 * 24 * 30 * 3}>3 months</MenuItem>
+                        <MenuItem value={60 * 60 * 24 * 30 * 6}>6 months</MenuItem>
+                        <MenuItem value={60 * 60 * 24 * 30 * 12}>1 year</MenuItem>
+                        <MenuItem value={60 * 60 * 24 * 30 * 12 * 3}>3 years</MenuItem>
+                        <MenuItem value={60 * 60 * 24 * 30 * 12 * 5}>5 years</MenuItem>
+                    </Select>
+                </Grid>
+                <Grid item md={12} sm={12} xs={12}>
+                    <TextField
+                        variant="standard"
+                        inputProps={{
+                            min: -1
+                        }}
+                        value={maxOpeningCount}
+                        margin="normal" label='Max openings count' type="number" id='input-max-openings-count'
+                        onChange={e => setMaxOpeningCount(e.target.value)}/>
+                </Grid>
+                <Grid item md={4}></Grid>
+                <Grid item md={2} sm={12} xs={12}>
+                    <Button variant="contained" color="primary" id="btn-open" onClick={openNote}>Open</Button>
+                </Grid>
+                <Grid item md={2} sm={12} xs={12}>
+                    <Button variant="contained" color="secondary" id="btn-create" onClick={createNote}>Create
+                        new</Button>
+                </Grid>
+                <Grid item md={4}></Grid>
+            </Grid>
         </>
     )
 };

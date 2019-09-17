@@ -5,6 +5,7 @@ import NoteView from './components/NoteView'
 import client from "./helper/apolloClient";
 import {gql} from "apollo-boost";
 import Utils from "./helper/utils";
+import AppBar from '@material-ui/core/AppBar';
 
 const config = {
     SALT: "oSQjLyBrapncJNkxbAS4JJRtpmzTYTVjaJd3oRsS3aREffnz"
@@ -103,6 +104,18 @@ function App(props) {
 
     return (
         <div className="App">
+            <AppBar style={{maxHeight: 60}}>
+                <a href={process.env.REACT_APP_WEBAPP_URL}>
+                    <img
+                        style={{
+                            margin: 5,
+                            width: 300,
+                            height: 40
+                        }}
+                        src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt="logo"/>
+                </a>
+            </AppBar>
+            <div style={{marginBottom: 70}}></div>
             {
                 isOpened ?
                     <NoteView

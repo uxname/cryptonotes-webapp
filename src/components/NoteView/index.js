@@ -36,14 +36,6 @@ export default function (props) {
             marginLeft: 100,
             marginRight: 100,
         }}>
-            <a href={process.env.REACT_APP_WEBAPP_URL}>
-                <img
-                    style={{
-                        margin: 30,
-                        width: 300
-                    }}
-                    src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt="logo"/>
-            </a>
             <br/>
             <a href={urlString}>
                 {urlString}
