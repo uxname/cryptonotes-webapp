@@ -115,7 +115,7 @@ function App(props) {
                         src={process.env.PUBLIC_URL + '/assets/logo.svg'} alt="logo"/>
                 </a>
             </AppBar>
-            <div style={{marginBottom: 70}}></div>
+            <div style={{marginBottom: 70}}/>
             {
                 isOpened ?
                     <NoteView
