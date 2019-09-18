@@ -99,6 +99,7 @@ function App(props) {
         setCurrentNoteKey(null);
         setCurrentNotePassword(null);
         setCurrentNoteText(null);
+        window.history.replaceState({}, null, process.env.REACT_APP_WEBAPP_URL);
         setIsOpened(false);
     }
 
